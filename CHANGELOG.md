@@ -1620,6 +1620,41 @@ All notable changes to this project will be documented in this file.
 - *(livewire)* Handle infrastructure request failures with toast
 - *(templates)* Add HashiCorp Vault service template
 - *(templates)* Add Obsidian LiveSync CouchDB service template
+- *(services)* Add Executor one-click deployment template (#11530)
+- *(media)* Serve avatars and project icons from S3 or CDN
+- *(previews)* Add preview domain management and DNS status tracking
+- *(settings)* Add development sponsorship reminder preview
+- *(backups)* Unify service backup management (#11574)
+- *(domains)* Support per-domain internal port overrides (#11594)
+- *(settings)* Configure CDN URL for stored images
+- *(backups)* Stream S3-only volume archives directly (#11642)
+- *(backups)* Alert when scheduled backups are missing (#11433)
+- Add backup controls, resource search, and Sentinel enablement
+- *(domains)* Keep domain drafts and move preview settings
+- *(domains)* Compact mobile domain rows and isolate preview modals
+- *(ui)* WCAG contrast, neutral oklch surface system, and mobile nav overhaul
+- *(ui)* Section-heading component, dashboard spacing, sidebar-toggle icon
+- *(ui)* Unify motion/transition system across interactive components
+- *(ui)* White settings rail in light mode, unify shadows, mobile sheet polish
+- *(ui)* Card-style header band and rounded body for connected terminal
+- *(theme)* Extract shared Alpine theme controls into components
+- *(ui)* Weld settings rail to main sidebar, full-height, unify width
+- *(ui)* Auto-collapse sidebar on settings pages; fixed full-height rail
+- *(ui)* WCAG contrast pass, neutral oklch surface system, and mobile nav overhaul (#11659)
+- *(ui)* Add raised hover and pressed depth to standard buttons
+- *(ui)* Capitalize button labels and speed depth transitions
+- *(ui)* Move preview deployment toggle into section actions
+- *(ui)* Polish env editor, error buttons, and modal layout
+- *(teams)* Persist active team and add team selection screen
+- *(teams)* Persist active team and add team selection screen (#11503)
+- *(sentinel)* Make sentinel mandatory on regular servers
+- *(deploy)* Pull compose images before stopping containers
+- *(notifications)* Allow toggling restart-limit email events
+- *(services)* Open resource settings in a modal with restart limits
+- *(logs)* Accept `all` for log lines and keep `-1`
+- *(restarts)* Make resource restart limits opt-in
+- *(sentinel)* Track synchronization state and refresh status UI
+- *(previews)* Move pull request settings into a modal
 
 ### 🐛 Bug Fixes
 
@@ -5830,6 +5865,123 @@ All notable changes to this project will be documented in this file.
 - *(deployments)* Honor selected Docker image rollback tag (#11480)
 - *(database)* Restore custom PostgreSQL backup archives (#11481)
 - *(api)* Accept cuid for private_key_uuid on GitHub App update (#11468)
+- Prevent duplicate 2FA challenge submissions causing HTTP 419
+- *(security)* Redact dotted GitHub tokens and contain wide data tables
+- *(teams)* Allow deletion with unused private keys (#11499)
+- *(teams)* Allow deletion with system-wide Git sources (#11500)
+- *(deployments)* Honor stop grace period in compose services (#11498)
+- *(deployments)* Restore commit links in deployment logs (#11495)
+- *(deployments)* Apply custom docker options when custom container name is set (#11479)
+- *(resources)* Make cleanup scalable and deletion atomic
+- *(resources)* Schedule stuck cleanup and delete metadata before jobs
+- *(security)* Preserve private key editor modal identity (#11497)
+- *(proxy)* Clear stale Traefik branch upgrade warnings (#11496)
+- *(server)* Reset unreachable_count after successful connection check (#11417)
+- *(ui)* Monaco editor placeholder alignment (#11514)
+- *(auth)* Rate limit by proxy-aware client ip instead of REMOTE_ADDR
+- *(auth)* Rate limit by proxy-aware client IP (#11515)
+- *(auth)* Use Cloudflare client IP for authentication rate limits
+- *(auth)* Queue verification emails for cloud registrations
+- *(services)* Add CDN and default logo fallbacks
+- *(server)* Allow sentinel startup migrations to finish
+- *(livewire)* Prevent stale keys and refresh races
+- *(domains)* Reject single-label hostnames for app and service domains
+- Preserve custom names and use Livewire redirects
+- *(docker)* Create standalone networks without the swarm driver
+- *(realtime)* Harden terminal command handling
+- Update resource forms
+- *(deployments)* Keep every domain intact in COOLIFY_URL and COOLIFY… (#11527)
+- *(resources)* Dispatch deletion cleanup after response
+- *(applications)* Persist restart limit state for stopped containers (#11566)
+- *(ui)* Keep sponsorship reminder listeners functional
+- *(resources)* Remove empty-domain placeholder from grid
+- *(application)* Defer Docker Compose loading and preserve domains
+- *(service)* Warn before removing required ports
+- *(database)* Warn about PostgreSQL password overwrite on full restore
+- *(ui)* Improve compose editor layout on mobile screens
+- *(livewire)* Authorize exposed resource mutations (#11596)
+- Update livewire to fix wire:dirty reactivity
+- Update livewire to fix wire:dirty reactivity (#11612)
+- *(ux)* Show api token description inline
+- *(ui)* Typo on storage delete modal (#11541)
+- *(notifications)* Send traefik outdated alerts to the correct topic id (#11526)
+- *(scheduler)* Run stuck resource cleanup in background at 03:17
+- *(domains)* Use Compose service ports for internal routing
+- *(service)* Show disabled deploy action when variables are missing
+- *(domains)* Sync Docker Compose domains for noindex settings
+- *(notifications)* Build api token expiry notification link from the instance url
+- *(notifications)* Build restart limit links from the instance url
+- *(notifications)* Urls for ssl renewal notifications
+- *(deployments)* Build deployment log links from the instance url
+- Build notification and deployment log links from the instance url (#11623)
+- TypeError when adding a new scheduled task
+- Remove database restart limits and clear stale Traefik state
+- Return null for invalid repository URLs
+- *(applications)* TypeError when stopping an application
+- *(docker)* Detect unqualified helper images
+- *(docker)* Match helper containers at any registry depth
+- *(docker)* Reap orphaned helper containers regardless of registry (#11540)
+- *(docker)* Preserve restart policies when stopping containers
+- *(domains)* Preserve removed compose service domains
+- *(environment-variables)* Preserve generated Compose variables
+- *(domains)* Limit instance addresses to localhost DNS hints
+- *(notifications)* Implement toWebhook() for always-send notifications
+- *(notifications)* Hetzner deletion failure channel name
+- *(notifications)* Add toWebhook payload to Hetzner deletion failure notification
+- *(notifications)* Add missing toWebhook methods to notifications (#11528)
+- *(docker)* Raise nginx request header buffers above the 8k default (#11404)
+- *(service)* Persist service database public access (#11633)
+- *(ui)* Keep modal content across re-renders (#11294)
+- Avoid inherited compose ports and defer archive inspection
+- *(api)* Persist Docker Compose domain ports as overrides
+- *(storage)* Persist S3 settings for new volume backups (#11635)
+- *(terminal)* Preserve PATH for SSH proxy commands (#11638)
+- *(api)* Return task execution duration as float (#11636)
+- *(webhooks)* Handle closed PRs after base branch changes (#11634)
+- *(storage)* Prevent PR suffix dropdown clipping (#11637)
+- *(api)* Align service domain validation with UI rules
+- Preserve shell negation in sudo commands
+- *(domains)* Route Compose domains using service ports
+- *(stripe)* Prevent duplicate subscription checkouts (#11666)
+- *(ui)* Use dropdown-level shadow for popovers and floating menus
+- *(ui)* Keep settings subnav in-page and persist sidebar collapse
+- *(ui)* Match dark-mode button depth to the regular border
+- *(ui)* Weld the deployment log sidebar to the main sidebar
+- *(application)* Allow general saves with wildcard domains (#11683)
+- *(ui)* Render service domain groups as separate cards
+- *(auth)* Redirect authenticated stale-token login submissions to the dashboard
+- Prevent duplicate 2FA challenge submissions causing HTTP 419 (#11223)
+- *(server)* Remove duplicate Disabled badge from metrics empty state
+- *(profile)* Show an enabled badge for two-factor authentication
+- *(teams)* Clear stale current_team_id when membership ends
+- *(teams)* Guard current_team_id clear against concurrent writes
+- *(team)* Resolve stored team on deletion and impersonation
+- *(terminal)* Distinguish application containers across servers
+- Support generic SSH Git usernames
+- *(git)* Parse generic scp-style SSH URLs with custom users
+- Support generic SSH Git usernames (#11685)
+- *(applications)* Flatten mobile config nav and pin domain save
+- *(ui)* Respect sidebar toggle and show application domains
+- *(service)* Write compose .env files atomically via temp rename
+- *(service)* Avoid storing inherited ports as overrides
+- *(domains)* Ignore hostless URLs in deployment and port overrides
+- *(domains)* Unify editing and queued DNS checks
+- *(domains)* Compact service cards at medium widths
+- *(domains)* Detect Docker Compose domain conflicts
+- *(s3)* Allow uppercase letters in S3 bucket names
+- *(backups)* Keep service DB context after deleting a schedule
+- *(services)* Keep Traefik subtype from stored service type
+- *(sentinel)* Restore hourly version checks for enabled servers
+- *(helper)* Prefer newer fetched helper version
+- *(helper)* Hide deployment details unless explicitly requested
+- *(restarts)* Reset legacy restart limits during migration
+- *(teams)* Redirect team switches to the dashboard
+- *(previews)* Split compose domains into Traefik labels (#11812)
+- *(dns)* Fall back to system resolver (#11811)
+- *(deployments)* Preserve and display pull request filters
+- *(storages)* Keep volume actions on one line
+- *(storages)* Remove host path from storage configuration
+- *(deployments)* Preserve whitespace in saved command output (#11466)
 
 ### 💼 Other
 
@@ -6326,6 +6478,7 @@ All notable changes to this project will be documented in this file.
 - *(Update)* Update Gitea runner image to version 1.0.7
 - *(service)* Inngest one click service template
 - *(api)* Add service-applications API to manage service applications
+- *(minio)* Use packaged mx client in development images
 
 ### 🚜 Refactor
 
@@ -7041,6 +7194,8 @@ All notable changes to this project will be documented in this file.
 - *(ui)* Fill resource logo tiles and support light/dark logo variants
 - *(storage)* Separate volumes from directory mounts
 - *(ui)* Rename forms.copy-button to forms.copy-input
+- *(livewire)* Make data-sync helpers private (#11578)
+- *(notifications)* Build scheduled task links from the instance url
 
 ### 📚 Documentation
 
@@ -7224,6 +7379,10 @@ All notable changes to this project will be documented in this file.
 - *(release)* Clarify branch strategy and SHA build flow
 - *(ui)* Clarify application image retention cleanup options
 - Design external TLS redirect control
+- Update changelog
+- *(security)* Require scoped authorization checks and regression tests
+- *(ai)* Consolidate engineering lessons
+- *(readme)* Rewrite project overview and usage documentation
 
 ### ⚡ Performance
 
@@ -7261,6 +7420,8 @@ All notable changes to this project will be documented in this file.
 - *(api)* Tighten nested server secret visibility checks
 - *(ui)* Use solid sidebar pills instead of accent gradients
 - *(ui)* Refine focus ring thickness and warning color
+- *(ui)* Unify view toggles at h-8 and View all buttons
+- *(ui)* Remove description placeholders and normalize control heights
 
 ### 🧪 Testing
 
@@ -7311,6 +7472,8 @@ All notable changes to this project will be documented in this file.
 - Align deployment config redaction expectations
 - Update tests for the new copy button component
 - *(var)* Fix env variable tests
+- Fix instance settings creation
+- *(auth)* Cover the 2FA duplicate submit guard
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -8222,6 +8385,23 @@ All notable changes to this project will be documented in this file.
 - *(release)* Bump Coolify versions to 4.3.10 and 4.3.11
 - Remove legacy Dusk tests and configure maintenance driver
 - Remove global copyToClipboard helper
+- *(releases)* Bump helper version to 1.0.16
+- *(helper)* Enable manual workflow dispatch
+- *(release)* Bump Coolify version to 4.3.12
+- Prepare v4.3.15
+- *(release)* Bump Coolify to 4.3.15 and realtime to 1.0.18
+- *(release)* Bump Coolify version to 4.3.17
+- Sync main to next once a day instead of on every push
+- *(release)* Bump Coolify version to 4.3.18
+- *(notifications)* Remove broken notification interface
+- *(auth)* Remove unneeded return
+- *(sentinel)* Bump sentinel version from 0.0.22 to 1.0.1
+- *(development)* Switch MinIO client to AIStor image
+- *(docker)* Pin AIStor MinIO client release
+- *(helper)* Bump helper version to 1.0.17
+- *(release)* Bump Coolify version to 4.3.20
+- *(traefik)* Update supported image versions
+- Notify Discord after image builds
 
 ### ◀️ Revert
 
