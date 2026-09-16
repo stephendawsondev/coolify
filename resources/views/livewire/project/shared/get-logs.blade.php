@@ -295,7 +295,7 @@
         @if ($streamLogs)
             <div class="sr-only" wire:poll.2000ms="getLogs(true)" aria-hidden="true"></div>
         @endif
-        <div x-show="expanded" {{ $collapsible ? 'x-collapse' : '' }}
+        <div x-show="expanded" {{ $collapsible ? 'x-collapse.duration.200ms' : '' }}
             :class="fullscreen ? 'fullscreen flex flex-col !overflow-visible' : 'relative w-full mx-auto'"
             :style="fullscreen ? 'max-height: none !important; height: 100% !important;' : ''">
             <div class="runtime-log-panel"
@@ -484,9 +484,11 @@
                             <div class="logs-viewer-meta">
                                 <form wire:submit="getLogs(true)" class="logs-viewer-lines">
                                     <span class="logs-viewer-lines-label">Lines</span>
-                                    <input type="number" wire:model="numberOfLines" placeholder="100" min="1" max="50000"
-                                        title="Number of Lines (max 50,000)" {{ $streamLogs ? 'readonly' : '' }}
+                                    <input type="number" wire:model="numberOfLines" placeholder="100" min="-1" max="50000"
+                                        title="Number of lines (max 50,000; use -1 for all)" {{ $streamLogs ? 'readonly' : '' }}
                                         class="input logs-viewer-lines-input" />
+                                    <button type="button" wire:click="showAllLogs" title="Show all logs"
+                                        class="runtime-log-icon-button" {{ $streamLogs ? 'disabled' : '' }}>All</button>
                                 </form>
                                 <span x-show="searchQuery.trim()" x-text="matchCount + ' matches'"
                                     class="text-xs text-gray-500 whitespace-nowrap dark:text-gray-400"></span>
@@ -513,19 +515,23 @@
                     @if ($outputs)
                         @php
                             $displayLines = collect(explode("\n", $outputs))->filter(fn($line) => trim($line) !== '');
+                            $lineOccurrences = [];
                         @endphp
                         <div id="logs" class="font-logs max-w-full cursor-default text-[11px] leading-relaxed sm:text-xs">
                             <div x-show="searchQuery.trim() && matchCount === 0"
                                 class="py-2 text-gray-500 dark:text-gray-400">
                                 No matches found.
                             </div>
-                            @foreach ($displayLines as $index => $line)
+                            @foreach ($displayLines as $line)
                                 @php
+                                    $lineFingerprint = md5($line);
+                                    $lineOccurrence = $lineOccurrences[$lineFingerprint] ?? 0;
+                                    $lineOccurrences[$lineFingerprint] = $lineOccurrence + 1;
+
                                     // Parse timestamp from log line (ISO 8601 format: 2025-12-04T11:48:39.136764033Z)
                                     $timestamp = '';
                                     $logContent = $line;
                                     if (preg_match('/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(?:\.(\d+))?Z?\s(.*)$/', $line, $matches)) {
-                                        $microseconds = isset($matches[2]) ? substr($matches[2], 0, 6) : '000000';
                                         $logContent = $matches[3];
 
                                         // Convert UTC Docker timestamp to server timezone for display
@@ -537,11 +543,9 @@
                                             // keep UTC
                                         }
                                         $timestamp = $carbonTs->format('Y-M-d H:i:s');
-                                        // Include microseconds in key for uniqueness
-                                        $lineKey = "{$timestamp}.{$microseconds}";
                                     }
                                 @endphp
-                                <div wire:key="{{ $lineKey ?? 'line-' . $index }}" data-log-line data-log-content="{{ $line }}" class="log-line logs-viewer-line">
+                                <div wire:key="log-{{ $lineFingerprint }}-{{ $lineOccurrence }}" data-log-line data-log-content="{{ $line }}" class="log-line logs-viewer-line">
                                     @if ($timestamp && $showTimeStamps)
                                         <span class="logs-viewer-timestamp text-gray-500">{{ $timestamp }}</span>
                                     @endif
