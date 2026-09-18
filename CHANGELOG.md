@@ -1655,6 +1655,9 @@ All notable changes to this project will be documented in this file.
 - *(restarts)* Make resource restart limits opt-in
 - *(sentinel)* Track synchronization state and refresh status UI
 - *(previews)* Move pull request settings into a modal
+- *(storages)* Support selective archive deletion for backup schedules
+- *(scheduling)* Persist and claim scheduled job occurrences
+- *(api)* Expose runtime logs for preview deployments (#11884)
 
 ### 🐛 Bug Fixes
 
@@ -5982,6 +5985,9 @@ All notable changes to this project will be documented in this file.
 - *(storages)* Keep volume actions on one line
 - *(storages)* Remove host path from storage configuration
 - *(deployments)* Preserve whitespace in saved command output (#11466)
+- *(storages)* Make volume backup executions responsive on mobile
+- *(deployments)* Trim remote command outputs before processing
+- *(ui)* Clarify resource deployment and restart action labels
 
 ### 💼 Other
 
@@ -7383,6 +7389,8 @@ All notable changes to this project will be documented in this file.
 - *(security)* Require scoped authorization checks and regression tests
 - *(ai)* Consolidate engineering lessons
 - *(readme)* Rewrite project overview and usage documentation
+- Update changelog
+- *(readme)* Remove LiquidWeb from big sponsors
 
 ### ⚡ Performance
 
