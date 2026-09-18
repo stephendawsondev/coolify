@@ -7,6 +7,8 @@ it('keeps the volume backup executions table horizontally scrollable on mobile',
     expect($view)
         ->toContain('volume-backup-executions-grid')
         ->toContain('data-table w-full overflow-x-auto')
+        ->toContain('x-forms.copy-button')
+        ->not->toContain('volume-backup-execution-label')
         ->and($css)
         ->toContain('.volume-backup-executions-grid')
         ->toContain('min-width: 50rem;')
@@ -21,6 +23,17 @@ it('uses compact icon actions for volume backup executions', function () {
         ->toContain('<x-reicon name="upload" class="size-3.5 rotate-180" />')
         ->toContain('title="Delete backup" aria-label="Delete backup"')
         ->toContain('<x-reicon name="trash" class="size-3.5" />');
+});
+
+it('keeps long volume backup errors inside the table without a separate background panel', function () {
+    $view = file_get_contents(resource_path('views/livewire/project/shared/storages/volume-backups/executions.blade.php'));
+
+    expect($view)
+        ->toContain('volume-backup-execution-message col-span-6 min-w-0 max-w-full')
+        ->toContain('max-h-20 overflow-y-auto overflow-x-hidden')
+        ->toContain('break-words whitespace-pre-wrap')
+        ->toContain('bg-transparent')
+        ->not->toContain('volume-backup-execution-message col-span-6 mt-2 max-h-32');
 });
 
 it('keeps storage backup schedule tables horizontally scrollable on mobile', function () {

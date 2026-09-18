@@ -3150,7 +3150,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .volume-backup-executions-grid {
-    grid-template-columns: 7.5rem minmax(0, 1fr) 8.5rem 7rem 9rem minmax(9rem, 0.7fr);
+    grid-template-columns: 7.5rem minmax(14rem, 1fr) 8.5rem 7rem 9rem minmax(9rem, 0.7fr);
     min-width: 50rem;
 }
 
