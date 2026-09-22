@@ -1658,6 +1658,65 @@ All notable changes to this project will be documented in this file.
 - *(storages)* Support selective archive deletion for backup schedules
 - *(scheduling)* Persist and claim scheduled job occurrences
 - *(api)* Expose runtime logs for preview deployments (#11884)
+- *(traffic)* Add traffic analytics server settings
+- *(traffic)* Enable Traefik JSON access log when analytics on
+- *(traffic)* Stamp coolify_app_id + JSON access log on Caddy sites
+- *(traffic)* Pass traffic env + proxy log mount to Sentinel
+- *(traffic)* Add enable/disable orchestration action
+- *(traffic)* Add traffic analytics DTOs
+- *(traffic)* Add Sentinel traffic pull client
+- *(traffic)* Cache Sentinel traffic responses for 60s
+- *(traffic)* Add team traffic aggregation service
+- *(traffic)* Add server traffic analytics toggle
+- *(traffic)* Add application analytics view
+- *(traffic)* Add server analytics view
+- *(traffic)* Add team dashboard traffic analytics
+- *(traffic)* Add live refresh, geo maps, and app overview widget
+- *(traffic)* Add global analytics page with status time series
+- *(traffic)* Replace world map with interactive globe visualization
+- *(traffic)* Add bandwidth and visitor sparklines to KPI cards
+- *(traffic)* Split traffic chart into requests and status codes
+- *(traffic)* Add traffic and GeoIP Sentinel config settings
+- *(analytics)* Lazy-load traffic pages and batch Sentinel calls
+- *(audit)* Add team activity tracking and audit log
+- *(secrets)* Resolve remote secret references at deployment
+- *(secrets)* Add integration token and application manager APIs
+- *(secrets)* Resolve integrations across deployments and databases
+- *(database)* Queue starts and resolve credentials securely
+- *(secrets)* Add 3rd party secret manager providers  (#11474)
+- *(audit)* Expose team events and log integration actions
+- *(audit)* Add team activity tracking and audit log (#11462)
+- *(ui)* Add split action button component
+- *(ui)* Use split action button
+- *(ui)* Show traefik dashboard link beside proxy actions
+- *(ui)* Split action button into primary and secondary actions (#11409)
+- *(auth)* Autofocus auth form fields and profile 2FA OTP (#11324)
+- *(analytics)* Add chart categories, loading states, and apply action
+- *(charts)* Show local and UTC times in metric tooltips
+- *(analytics)* Add server analytics page and split settings
+- *(traffic)* Add Coolify analytics for Traefik and Caddy (#11292)
+- Add database import API and Cloudflare DNS management
+- *(database)* Add replace-existing option for PostgreSQL restores
+- *(api)* Add database import and Cloudflare DNS management (#11699)
+- *(docker)* Use ISO 8601 timestamp suffix for generated container names (#11702)
+- *(docker)* Add container name prefix for generated container names
+- *(ui)* Add container name prefix to application container settings
+- *(api)* Allow setting the container name prefix
+- *(docker)* Limit container name prefixes to 30 characters
+- Add custom container name prefix option (#11704)
+- *(ui)* Dashboard refinements + wire:navigate setting fixes
+- *(ui)* Optimistic updates for notifications and resource actions
+- *(service)* Reopen the live deployment log after closing it
+- *(database)* Reopen the live start/restart log after closing it
+- *(env-vars)* Split production and preview into labelled sections
+- *(ui)* Collapse resource settings sidebar groups into an accordion
+- *(ui)* Search box on the application settings sidebar
+- *(ui)* Search results show category/parent + include sub-pages
+- *(ui)* Dashboard & resource UI refinements + reopen deployment log (#11783)
+- *(deployments)* Add team policy for build server fallback
+- *(servers)* Add configurable deployment and build roles
+- *(audit)* Expand event tracking and remove scheduled job monitoring
+- Deprecate new Docker Swarm usage and group referrers
 
 ### 🐛 Bug Fixes
 
@@ -5988,6 +6047,64 @@ All notable changes to this project will be documented in this file.
 - *(storages)* Make volume backup executions responsive on mobile
 - *(deployments)* Trim remote command outputs before processing
 - *(ui)* Clarify resource deployment and restart action labels
+- *(traffic)* Show empty-state when all dashboard analytics fetches fail
+- *(traffic)* Validate sentinel app keys, gate caddy log volume + swarm toggle, null-safe link
+- *(dashboard)* Remove traffic analytics enablement nudge
+- *(traffic-analytics)* Stop leaking geoip key and gate sentinel restart
+- *(traffic-analytics)* Clear stale chart and cache dashboard 404s
+- *(database)* Preserve credentials and activity context on start
+- *(audit)* Harden audit logging and admin controls
+- *(audit)* Restrict sensitive fields and centralize event filtering
+- *(audit)* Prevent duplicate API update events
+- *(audit)* Validate event filters and preserve suppression state
+- *(audit)* Restore horizontal scrolling for mobile event tables
+- *(notifications)* Restore missing toggleEvent on Email settings component (#11512)
+- *(sentinel)* Mount dev proxy volume for local traffic logs
+- *(database)* Align restore confirmation copy with replace-existing behavior
+- *(database)* Emit valid shell env vars in dump-all MySQL imports
+- *(api)* Reject unknown fields on database import
+- *(dns)* Skip auto DNS jobs when server IP is invalid
+- *(api)* Return invalid token for database import endpoints
+- Serialize database import starts per resource
+- *(database)* Decompress gzip backups for mysql and mariadb restores
+- Queue import cleanup and scope DNS record updates
+- *(database)* Keep S3 import credentials out of activity commands
+- *(analytics)* Hide traffic UI when disabled and skip default-on (#11700)
+- *(docker)* Enable consistent naming for legacy custom container names
+- *(docker)* Only use custom container names in consistent naming mode
+- *(docker)* Use custom container names for compose applications
+- *(docker)* Custom container names (#11701)
+- *(dev)* Pull minio mc client from quay.io
+- *(ui)* Follow-up polish + extend deploy-log reopen to apps
+- Address review — minio mc build stage + settings sidebar sticky
+- *(notifications)* Add canGate/canResource authorization to channel buttons
+- *(ui)* Collapse non-active sub-sections + accordion on inline service nav
+- *(ui)* Keep active settings group expanded
+- *(destinations)* Prevent duplicate additional destinations
+- *(server)* Distinguish pending Sentinel reports from out-of-sync state
+- *(proxy)* Preserve custom config when toggling traffic analytics
+- *(deployments)* Validate git refs before queueing
+- *(deployments)* Validate git refs before queueing (#11905)
+- *(auth)* Improve OAuth sign-in handling
+- *(proxy)* Prevent automatic Traefik self-exposure
+- *(deployments)* Validate compose build paths
+- *(deployments)* Validate compose build paths (#11911)
+- *(applications)* Validate custom internal container names
+- *(applications)* Validate custom internal container names (#11912)
+- Validate application key selection
+- Validate application key selection (#11913)
+- *(compose)* Validate Docker network names
+- *(compose)* Validate Docker network names (#11914)
+- *(webhooks)* Reject incomplete Stripe configuration
+- *(webhooks)* Reject incomplete Stripe configuration (#11915)
+- *(deployments)* Validate environment variable names used in Docker commands
+- *(deployments)* Validate environment variable names used in Docker commands (#11917)
+- *(onboarding)* Enforce resource authorization
+- *(onboarding)* Enforce resource authorization (#11920)
+- *(webhooks)* Validate preview repository metadata
+- *(webhooks)* Validate preview repository metadata (#11922)
+- *(proxy)* Normalize port configuration handling
+- *(proxy)* Normalize port configuration handling (#11923)
 
 ### 💼 Other
 
@@ -7202,6 +7319,8 @@ All notable changes to this project will be documented in this file.
 - *(ui)* Rename forms.copy-button to forms.copy-input
 - *(livewire)* Make data-sync helpers private (#11578)
 - *(notifications)* Build scheduled task links from the instance url
+- *(ui)* Cleanup css
+- *(ui)* Make settings filter subordinate to the global search
 
 ### 📚 Documentation
 
@@ -7391,6 +7510,9 @@ All notable changes to this project will be documented in this file.
 - *(readme)* Rewrite project overview and usage documentation
 - Update changelog
 - *(readme)* Remove LiquidWeb from big sponsors
+- Update changelog
+- Clarify restart type
+- Clarify restart cause (#11774)
 
 ### ⚡ Performance
 
@@ -7430,6 +7552,8 @@ All notable changes to this project will be documented in this file.
 - *(ui)* Refine focus ring thickness and warning color
 - *(ui)* Unify view toggles at h-8 and View all buttons
 - *(ui)* Remove description placeholders and normalize control heights
+- *(dashboard)* Apply surface treatment to analytics KPI cards
+- *(analytics)* Use coollabs-base KPI tiles and fix chevron-down
 
 ### 🧪 Testing
 
@@ -7482,6 +7606,10 @@ All notable changes to this project will be documented in this file.
 - *(var)* Fix env variable tests
 - Fix instance settings creation
 - *(auth)* Cover the 2FA duplicate submit guard
+- *(traffic)* Browser smoke test for analytics views
+- *(dns)* Sort cached Cloudflare zone names before asserting
+- *(database)* Use App\Models namespaces in import command builder tests
+- *(api)* Assert abilities on all database import routes
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -8410,6 +8538,19 @@ All notable changes to this project will be documented in this file.
 - *(release)* Bump Coolify version to 4.3.20
 - *(traefik)* Update supported image versions
 - Notify Discord after image builds
+- Remove obsolete AI lessons and task notes
+- Merge main into next (#11598)
+- *(storage)* Remove dead storages show component (#11615)
+- Merge main into next (#11613)
+- Merge main into next (#11678)
+- Merge main into next (#11690)
+- Merge main into next (#11732)
+- Merge main into next (#11784)
+- Schedule main-to-next sync every 10 minutes
+- *(realtime)* Bump Coolify realtime image to 1.0.20
+- *(realtime)* Enable manual runs and config-triggered builds
+- *(release)* Bump Coolify and realtime versions
+- Add manual ARM64 branch image build workflow
 
 ### ◀️ Revert
 
@@ -8425,5 +8566,6 @@ All notable changes to this project will be documented in this file.
 - Remove Cloudflare async tag attributes
 - Encrypting mount and fs_path
 - *(parser)* Enhance FQDN generation logic for services and applications
+- *(dev)* Drop minio/mc registry changes (fixed upstream)
 
 <!-- generated by git-cliff -->
